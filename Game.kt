@@ -1,6 +1,7 @@
 import java.lang.IllegalArgumentException
 import java.lang.IllegalStateException
 import java.util.*
+import kotlin.system.exitProcess
 
 const val MAX_EXPERIENCE: Int =5000
 
@@ -90,7 +91,18 @@ object Game {
         "打玩了"
     }?: "這兒沒有怪物可以打了~~~"
 
-
+private fun slay(monster: Monster){
+    println("${monster.name} 被 ${monster.attack(player)} 攻擊損傷!")
+    println("${player.name} 被 ${player.attack(monster)} 攻擊損傷!")
+    if(player.healthPoints<=0){
+        println(">>>>嘿，真可惜，妳被打敗了! 感謝參與本遊戲 <<<<")
+        exitProcess(0)
+    }
+    if (monster.healthPoints <=0){
+        println(">>>> ${monster.name} 已被您擊敗! <<<<")
+        currentRoom.monster = null
+    }
+}
 
     private fun quit(player: Player) = "~~~ 再見，${player.name}，歡迎再來玩 ~~~"
 
