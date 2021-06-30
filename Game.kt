@@ -83,6 +83,15 @@ object Game {
             "無效方向: $directionInput."
         }
 
+    private fun fight() = currentRoom.monster?.let {
+        while (player.healthPoints>0 && it.healthPoints>0){
+            Thread.sleep(1000)
+        }
+        "打玩了"
+    }?: "這兒沒有怪物可以打了~~~"
+
+
+
     private fun quit(player: Player) = "~~~ 再見，${player.name}，歡迎再來玩 ~~~"
 
     private fun printMap(player: Player) {
