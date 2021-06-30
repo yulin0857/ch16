@@ -58,6 +58,7 @@ object Game {
         val argument = input.split(" ").getOrElse(1, { "" })
 
         fun processCommand() = when(command.toLowerCase(Locale.getDefault())){
+            "fight" -> fight()
             "move" -> move(argument)
             "map" ->printMap(player)
             "ring" ->ringBell("Gaong~~")
@@ -86,6 +87,7 @@ object Game {
 
     private fun fight() = currentRoom.monster?.let {
         while (player.healthPoints>0 && it.healthPoints>0){
+            slay(it)
             Thread.sleep(1000)
         }
         "打玩了"
